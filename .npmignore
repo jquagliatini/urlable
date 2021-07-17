@@ -1,0 +1,9 @@
+lib
+index.ts
+examples
+jest.config.js
+tsconfig.json
+dist/
+.husky/
+coverage/
+types/

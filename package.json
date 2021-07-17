@@ -1,0 +1,43 @@
+{
+  "name": "urlable",
+  "version": "0.0.1",
+  "description": "synchronize an object with the URL query string",
+  "keywords": [
+    "url",
+    "query string",
+    "querystring",
+    "sync",
+    "proxy"
+  ],
+  "main": "index.js",
+  "module": "index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "prepare": "husky install",
+    "clean": "rimraf index.js dist types",
+    "test": "jest",
+    "test:coverage": "jest --runInBand --coverage",
+    "build:type": "tsc -p .",
+    "build": "esbuild index.ts --target=es2020 --format=esm --outdir=dist --bundle",
+    "prepack:bundle": "mv dist/*.js .",
+    "prepack": "run-s 'clean' 'build:type' 'build' 'prepack:bundle'",
+    "format": "prettier --write ./**/*.ts examples/*.html",
+    "hook:prepush": "run-s 'test' 'format'"
+  },
+  "author": "Jordan QUAGLIATINI",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/lodash": "^4.14.171",
+    "esbuild": "^0.12.15",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "lodash": "^4.17.21",
+    "mv": "^2.1.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  }
+}

@@ -1,4 +1,4 @@
-<h1 style="text-align:center">urlable</h1>
+# urlable
 
 urlable, is a tiny library, that helps to create a dynamic object,
 where each mutation results in a query string update. This becomes
@@ -11,7 +11,7 @@ The package is provided as an ESM build, and can be included as is in the browse
 
 ## Disclaimer
 
-This library relies heavily on cutting-edge technologies:
+This library relies heavily on "cutting-edge" technologies:
 
 - Proxy
 - Reflect
@@ -30,7 +30,7 @@ the initial object.
 | `readUrl`     | this is mainly useful for testing purposes, but it allows to override the URL reading behavior                                                                             |
 | `writeUrl`    | the function to call when writing the query string to the URL. It receives the new query string when required to update. Again, this is mainly useful for testing purposes |
 
-The type definition can be founs as `UrlableOptions`.
+The type definition can be found as [`UrlableOptions`](https://github.com/jquagliatini/urlable/blob/main/lib/urlable.ts#L12).
 
 ## Example
 
@@ -48,26 +48,52 @@ You can find a full example, in the [`examples`](./examples) folder.
 
 ## Q&A
 
-+ **What if I want to change the name of a key in the query string?**
+<details>
+  <summary>
+    <strong>What if I want to change the name of a key in the query string?</strong>
+  </summary>
+
   use the `serialize` option:
 
-    ```typescript
-    // display the property `currentPage` as `page` in the URL.
-    const pagination = urlable({ currentPage: 2 }, { serialize: ({ currentPage }) => ({ page: String(currentPage) }) })
-    ```
+  ```typescript
+  // display the property `currentPage` as `page` in the URL.
+  const pagination = urlable(
+    { currentPage: 2 },
+    { serialize: ({ currentPage }) => ({ page: String(currentPage) }) }
+  )
+  ```
+</details>
 
-+ **How to hide a property from the URL?**
+<details>
+
+  <summary>
+    <strong>How to hide a property from the URL?</strong>
+  </summary>
+
   remove the property in the `serialize` option:
 
-    ```typescript
-    // The `totalPages` property will not show in the query string
-    const pagination = urlable({ page: 1, totalPages: 10 }, { serialize: (x) => ({ page: String(x.page) }) });
-    ```
+  ```typescript
+  // The `totalPages` property will not show in the query string
+  const pagination = urlable(
+    { page: 1, totalPages: 10 },
+    { serialize: (x) => ({ page: String(x.page) }) }
+  );
+  ```
 
-+ **How to secure the type of the properties?**
+</details>
+
+<details>
+  <summary>
+    <strong>How to secure the type of the properties?</strong>
+  </summary>
+
   the `deserialize` options is here:
 
   ```typescript
   // pagination.page will always be a number.
-  const pagination = urlable({ page: 1 }, { deserialize: (x) => ({ page: Number(x.page) }) });
+  const pagination = urlable(
+    { page: 1 },
+    { deserialize: (x) => ({ page: Number(x.page) }) }
+  );
   ```
+</details>

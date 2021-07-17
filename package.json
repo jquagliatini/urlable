@@ -21,11 +21,16 @@
     "build": "esbuild index.ts --target=es2020 --format=esm --outdir=dist --bundle",
     "prepack:bundle": "mv dist/*.js .",
     "prepack": "run-s 'clean' 'build:type' 'build' 'prepack:bundle'",
-    "format": "prettier --write ./**/*.ts examples/*.html",
-    "hook:prepush": "run-s 'test' 'format'"
+    "format:check": "prettier --check lib/**.ts examples/*.html",
+    "format": "prettier --write lib/**.ts examples/*.html",
+    "hook:prepush": "run-s 'test' 'format:check'"
   },
   "author": "Jordan QUAGLIATINI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jquagliatini/urlable"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
